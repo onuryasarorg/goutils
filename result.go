@@ -26,13 +26,26 @@ func Respond(data map[string]interface{}) (*Response, error) {
 	jsonData, _ := json.Marshal(data)
 	statusCode := http.StatusOK
 	if data["status"] != nil && !data["status"].(bool) {
-		statusCode = http.StatusNotFound
+		statusCode = http.StatusNoContent
 	}
 	return &Response{
 		StatusCode: statusCode,
 		Headers:    map[string]string{},
 		Body:       string(jsonData),
 	}, nil
+}
+
+func ResMessage(status bool, message string) (bool, Response) {
+	jsonData, _ := json.Marshal(Message(status, message))
+	statusCode := http.StatusOK
+	if !status {
+		statusCode = http.StatusNoContent
+	}
+	return status, Response{
+		StatusCode: statusCode,
+		Headers:    map[string]string{},
+		Body:       string(jsonData),
+	}
 }
 
 const (
