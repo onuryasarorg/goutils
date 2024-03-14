@@ -22,16 +22,32 @@ func Message(status bool, message string) map[string]interface{} {
 	return map[string]interface{}{"status": status, "message": message}
 }
 
+func ErrMessage(status bool, err error) map[string]interface{} {
+	return map[string]interface{}{"status": status, "message": err}
+}
+
+func RespondError(err error) (*Response, error) {
+	return &Response{
+		StatusCode: http.StatusOK,
+		Headers:    map[string]string{},
+		Body:       "",
+	}, err
+}
+
 func Respond(data map[string]interface{}) (*Response, error) {
 	jsonData, _ := json.Marshal(data)
-	statusCode := http.StatusOK
-	if data["status"] != nil && !data["status"].(bool) {
-		statusCode = http.StatusNoContent
-	}
 	return &Response{
-		StatusCode: statusCode,
+		StatusCode: http.StatusOK,
 		Headers:    map[string]string{},
 		Body:       string(jsonData),
+	}, nil
+}
+
+func RespondNoContent() (*Response, error) {
+	return &Response{
+		StatusCode: http.StatusNoContent,
+		Headers:    map[string]string{},
+		Body:       "",
 	}, nil
 }
 
