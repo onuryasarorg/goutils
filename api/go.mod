@@ -1,4 +1,4 @@
-module github.com/onuryasarorg/goutils
+module github.com/onuryasarorg/goutils/api
 
 go 1.20
 

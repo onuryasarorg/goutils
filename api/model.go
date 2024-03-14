@@ -1,4 +1,4 @@
-package goutils
+package api
 
 import (
 	"github.com/dgrijalva/jwt-go"
