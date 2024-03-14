@@ -53,12 +53,8 @@ func RespondNoContent() (*Response, error) {
 
 func ResMessage(status bool, message string) (bool, Response) {
 	jsonData, _ := json.Marshal(Message(status, message))
-	statusCode := http.StatusOK
-	if !status {
-		statusCode = http.StatusNoContent
-	}
 	return status, Response{
-		StatusCode: statusCode,
+		StatusCode: http.StatusOK,
 		Headers:    map[string]string{},
 		Body:       string(jsonData),
 	}
