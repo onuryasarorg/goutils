@@ -60,6 +60,10 @@ func ResMessage(status bool, message string) (bool, Response) {
 	}
 }
 
+func CheckOk(data map[string]interface{}) bool {
+	return data["status"].(bool)
+}
+
 const (
 	None = iota
 	Root
