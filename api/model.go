@@ -15,14 +15,13 @@ type Response struct {
 }
 
 type Context struct {
-	UserId     uuid.UUID
-	RoleId     int
-	AppId      int
-	MerchantId uuid.UUID
-	HasId      int
-	ProjectId  int
-	CustomData string
-	Key        string
+	UserId     uuid.UUID `json:"userId"`
+	RoleId     int       `json:"roleId"`
+	AppId      int       `json:"appId"`
+	MerchantId uuid.UUID `json:"merchantId"`
+	HasId      int       `json:"hasId"`
+	ProjectId  int       `json:"projectId"`
+	CustomData string    `json:"customData"`
 }
 
 type Token struct {
