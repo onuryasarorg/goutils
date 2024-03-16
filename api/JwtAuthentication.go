@@ -9,7 +9,7 @@ import (
 	"github.com/dgrijalva/jwt-go"
 )
 
-var JwtAuthentication = func(requestToken string, context Context) (bool, Response) {
+var JwtAuthentication = func(requestToken string, context *Context) (bool, Response) {
 
 	result := Response{}
 
