@@ -19,7 +19,7 @@ type Context struct {
 	RoleId     int       `json:"roleId"`
 	AppId      int       `json:"appId"`
 	MerchantId uuid.UUID `json:"merchantId"`
-	HasId      int       `json:"hasId"`
+	HasId      bool      `json:"hasId"`
 	ProjectId  int       `json:"projectId"`
 	CustomData string    `json:"customData"`
 }
@@ -29,7 +29,7 @@ type Token struct {
 	RoleId     int
 	AppId      int
 	MerchantId uuid.UUID
-	HasId      int
+	HasId      bool
 	ProjectId  int
 	CustomData string
 	jwt.StandardClaims
