@@ -32,11 +32,18 @@ var JwtAuthentication = func(requestToken string, context *Context) (bool, Respo
 	tk := &Token{}
 
 	token, err := jwt.ParseWithClaims(tokenPart, tk, func(token *jwt.Token) (interface{}, error) {
-		return []byte(os.Getenv("token_password")), nil
+		return []byte(os.Getenv("token_secret_key")), nil
 	})
 
 	if err != nil { //Malformed token, returns with http code 403 as usual
-		return ResMessage(false, "Malformed authentication token")
+
+		token, err = jwt.ParseWithClaims(tokenPart, tk, func(token *jwt.Token) (interface{}, error) {
+			return []byte(os.Getenv("token_root_secret_key")), nil
+		})
+
+		if err != nil {
+			return ResMessage(false, "Malformed authentication token")
+		}
 	}
 
 	if !token.Valid { //Token is invalid, maybe not signed on this server
